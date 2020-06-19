@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* font-family: 'Dosis', sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+#blogcontainer  {
+  font-family: 'Exo 2', sans-serif, 'Open Sans';
+}
+#blogcontainer pre {
+  background-color: rgb(0, 0, 0);
+  color: white;
+
+}
+
+#blogcontainer img {
+
+  max-width:100%;
+  max-height: auto;
+}

@@ -1,0 +1,68 @@
+.AdminApp {
+
+    padding: 4% 2%;
+    /* background-color: rgb(215, 255, 189); */
+    background-image: linear-gradient(to bottom right,rgb(107, 221, 122) , rgb(150, 250, 183));
+
+  }
+  
+  .App-logo {
+    height: 40vmin;
+  }
+  td{
+    text-align: center;
+  }
+  
+ 
+  
+  .App-link {
+    color: #09d3ac;
+  }
+  
+  .login{
+  
+    text-align: center;
+   display: inline;
+   
+    left: 50%;
+    top:50%
+  }
+  .postStyle{
+    background-color: linear-gradient(56, 182, 119, 0.918);
+    background-image: linear-gradient(to right, rgba(96, 199, 194, 0.226), rgba(61, 115, 122, 0.37));
+    padding : 10px;
+    height: 100%;
+    margin-bottom: 1%;
+    border-radius: 2%;
+  }
+  .updateButton{
+    background-color : rgba(47, 129, 14, 0.925) ;
+    color: rgb(193, 255, 203);
+    border:none;
+    font-size: small;
+    padding : 1px 5px 5px 5px;
+    border-radius : 8%;
+    cursor :pointer;
+    float:right
+  }
+  .delButton{
+    background-color : rgba(73, 20, 18, 0.932) ;
+    color: rgb(255, 223, 223);
+    font-size: small;
+    border:none;
+    padding : 1px 5px 5px 5px;
+    border-radius : 8%;
+    cursor :pointer;
+    float:right
+  }
+  #spinner {
+    top: 30%;
+    left: 50%;
+    position: absolute;
+    background: white;
+  }
+  #spinner1 {
+  
+    position: absolute;
+    background: transparent;
+  }
