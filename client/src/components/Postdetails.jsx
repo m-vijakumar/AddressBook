@@ -16,7 +16,7 @@ function Postdetails(props) {
            
             <h6>  
             <button onClick={delAddress} className="delButton" value={props.post._id}>delete</button>
-             <button onClick={updateAddress} className="updateButton mr-3">update</button>
+             <button onClick={updateAddress} className="updateButton mr-3">edit</button>
              {"  "}{props.post.name}<br />
              {"  "}{props.post.phoneno}<br />
              {"  "}{props.post.address}<br />

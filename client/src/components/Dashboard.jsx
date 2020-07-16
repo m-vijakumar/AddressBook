@@ -146,13 +146,13 @@ export default  function Dashboard(props) {
         {isSpinner1? sp : ''}
         <div className="AdminApp">
         <h1>Welcome</h1>
-        <div className="d-flex justify-content-end" >
-              <a href="/contact/create"><button className="btn btn-primary"><h5>Create</h5></button></a>
+        <div className="d-flex justify-content-end mr-3" >
+              <a href="/contact/create"><button className="btn btn-primary"><h5>Add</h5></button></a>
             </div>
             <br />
             <div class="form-group ">
                           
-              <input type="text" class="form-control md-2" name="find"  placeholder="Find" onChange={ss}/>
+              <input type="text" class="form-control md-2" name="find"  placeholder="Find name Or number ......" onChange={ss}/>
           </div>
             
             {findKey ? showAutoList : showAddress}

@@ -2,7 +2,7 @@
 
     padding: 4% 2%;
     /* background-color: rgb(215, 255, 189); */
-    background-image: linear-gradient(to bottom right,rgb(107, 221, 122) , rgb(150, 250, 183));
+    background-color: transparent;
 
   }
   
@@ -28,16 +28,17 @@
     top:50%
   }
   .postStyle{
-    background-color: linear-gradient(56, 182, 119, 0.918);
-    background-image: linear-gradient(to right, rgba(96, 199, 194, 0.226), rgba(61, 115, 122, 0.37));
+    background-color: rgba(217, 232, 236, 0.163);
+    /* background-image: linear-gradient(to right, rgba(96, 199, 194, 0.226), rgba(120, 213, 214, 0.599)); */
     padding : 10px;
     height: 100%;
     margin-bottom: 1%;
     border-radius: 2%;
+    border: 1px solid rgb(151, 222, 241);
   }
   .updateButton{
-    background-color : rgba(47, 129, 14, 0.925) ;
-    color: rgb(193, 255, 203);
+    background-color : rgb(141, 235, 224) ;
+    color: rgb(45, 61, 45);
     border:none;
     font-size: small;
     padding : 1px 5px 5px 5px;
@@ -46,7 +47,7 @@
     float:right
   }
   .delButton{
-    background-color : rgba(73, 20, 18, 0.932) ;
+    background-color : rgb(73, 20, 18) ;
     color: rgb(255, 223, 223);
     font-size: small;
     border:none;

@@ -134,7 +134,7 @@ export default function Update(props) {
       Updating...
     </button>
     
-    const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Update Product"} className="btn btn-primary float-right" onClick={handleSubmit} />
+    const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Update Contact"} className="btn btn-primary float-right" onClick={handleSubmit} />
         if (isSpinner) {
           return (
             <div className="d-flex justify-content-center " >
