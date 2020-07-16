@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
   const userlog= async ()=>{
 
     try{
-    const resp = await fetch("/api/admin/auth/verfiy");
+    const resp = await fetch("/api/auth/verfiy");
     const data = await resp.json();
     // console.log(data)
          if(data.success === true){
@@ -53,7 +53,7 @@ import { useState, useEffect } from 'react'
  
       setSpinner1(true)
       e.persist();
-    const response = await fetch('/api/admin/auth/register' , {
+    const response = await fetch('/api/auth/register' , {
     method: "POST",
     headers: {
       Accept: "application/json",

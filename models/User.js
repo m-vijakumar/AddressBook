@@ -13,6 +13,20 @@ const userSchema = new Schema({
         type: String,
         require:true
     },
+    addresses:[{
+        name:{
+            type: String,
+            require:true
+        },
+        phoneno:{
+            type: String,
+            require:true
+        },
+        address:{
+            type: String,
+            default :null
+        }      
+    }],
     date:{
         type:Date,
         default :Date.now

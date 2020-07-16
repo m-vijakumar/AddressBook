@@ -3,15 +3,15 @@ import AdminNavbar from './AdminNavbar';
 
 export default function Create(props) {
 
-  const [postData, setPostData] = useState({});
-  const [postContent, setPostContent] = useState("");
+  const [addressData, setAddressData] = useState({});
+  const [addressContent, setAddressContent] = useState("");
   // const [message, setMessage] = useState("");
   const [isSpinner,setSpinner] =useState(true);
   // const [show,setShow] =useState(false);
   const [isSpinner1,setSpinner1] =useState(false);
   const userlog= async ()=>{
     try{
-    const resp = await fetch("/api/admin/auth/verfiy");
+    const resp = await fetch("/api/auth/verfiy");
     const data = await resp.json();
     // console.log(data)
          if(data.success === false){
@@ -25,12 +25,12 @@ export default function Create(props) {
     }
 
     const getContent = (content)=>{
-            setPostContent(content)
+            setAddressContent(content)
     }
 
     const handleChange = e => {
    
-        setPostData({ ...postData, [e.target.name]: e.target.value });
+        setAddressData({ ...addressData, [e.target.name]: e.target.value });
       };
 
       useEffect(()=>{
@@ -41,21 +41,21 @@ export default function Create(props) {
       const handleSubmit = async (e) => {
          
         try{
-        if( !postData.title ||! postData.imgsrc ){
+        if( !addressData.name ||! addressData.phoneno ){
     
           alert("fill the details")
         }else{
             
-        const postdata = {
-         
-          title : postData.title,
-          imgsrc: postData.imgsrc,
-          description : postData.description
+        const addressdata = {
+                
+          name : addressData.name,
+          phoneno:addressData.phoneno,
+          address:addressData.address,
         };
      
         setSpinner1(true)
         e.persist();
-        const response = await fetch('/api/admin/product/create' , {
+        const response = await fetch('/api/address/add' , {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -63,14 +63,14 @@ export default function Create(props) {
     
         },
         mode:"cors",
-        body :JSON.stringify(postdata)
+        body :JSON.stringify(addressdata)
       })
       const data = await response.json();
       // console.log(data)
       if (data.error === false) {
        
         // console.log(data.success)
-        alert("Product Added");
+        alert("Contact Added");
          props.history.push("/dashboard");
          setSpinner1(false)
         
@@ -88,7 +88,7 @@ export default function Create(props) {
       Adding...
     </button>
     
-    const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Add Product"} className="btn btn-primary float-right" onClick={handleSubmit} />
+    const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Add Contact"} className="btn btn-primary float-right" onClick={handleSubmit} />
         if (isSpinner) {
           return (
             <div className="d-flex justify-content-center " >
@@ -108,16 +108,16 @@ export default function Create(props) {
             <div onChange={handleChange} className="container">
             
             <div class="form-group ">
-            <label >Title</label>                
-                <input type="text" class="form-control md-2" name="title"  placeholder="title"/>
+            <label >Name</label>                
+                <input type="text" class="form-control md-2" name="name"  placeholder="name"/>
             </div>
             <div class="form-group ">
-            <label >imgsrc</label>                
-                <input type="text" class="form-control md-2" name="imgsrc" placeholder="imgsrc"/>
+            <label >Phone No</label>                
+                <input type="number" class="form-control md-2" name="phoneno" placeholder="phoneno" onInput={(e) => e.target.value = e.target.value.slice(0, 12)}/>
             </div>
             <div class="form-group ">
-            <label >Description</label>                
-            <textarea rows="3" cols="15" className="form-control" name="description" placeholder="description"></textarea>
+            <label >Address</label>                
+            <textarea rows="3" cols="15" className="form-control" name="address" placeholder="Address"></textarea>
             </div>
             </div>
             

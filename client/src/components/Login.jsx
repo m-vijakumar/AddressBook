@@ -10,7 +10,7 @@ function Login(props){
   const userlog= async ()=>{
 
     try{
-    const resp = await fetch("/api/admin/auth/verfiy");
+    const resp = await fetch("/api/auth/verfiy");
     const data = await resp.json();
     // console.log(data)
          if(data.success === true){
@@ -52,7 +52,7 @@ function Login(props){
  
     setSpinner1(true)
     e.persist();
-    const response = await fetch('/api/admin/auth/login' , {
+    const response = await fetch('/api/auth/login' , {
     method: "POST",
     headers: {
       Accept: "application/json",

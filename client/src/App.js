@@ -57,8 +57,8 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/post/create" component={Create} />
-        <Route exact path="/post/update/:postId/:postname" component={Update} />
+        <Route exact path="/contact/create" component={Create} />
+        <Route exact path="/contact/update/:postId/:postname" component={Update} />
 
         
         <Route  path="*" component={Error} />

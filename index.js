@@ -30,8 +30,8 @@ app.use(session({
 
 
 app.use(cors());
-app.use("/api/admin",require("./routers/api/auth"));
-app.use("/api/admin/product",require("./routers/api/product"));
+app.use("/api",require("./routers/api/auth"));
+app.use("/api/address",require("./routers/api/address"));
 
 const db =require("./setup/connect").mongodbURL;
 const s =async()=>{ 
@@ -43,17 +43,17 @@ await mongoose
 s().catch(err => console.log(err))
 
 
-// app.get("/",(req,res)=>{
+app.get("/",(req,res)=>{
     
-//     res.send("hello");
-// });
+    res.send("hello");
+});
 
-app.use(express.static(path.join(__dirname, "client/build")));
-    app.get("/*", (req, res) => {
-        res.sendFile(path.join(__dirname, "client/build/index.html"), err => {
-            res.status(500).send(err);
-        });
-    });
+// app.use(express.static(path.join(__dirname, "client/build")));
+//     app.get("/*", (req, res) => {
+//         res.sendFile(path.join(__dirname, "client/build/index.html"), err => {
+//             res.status(500).send(err);
+//         });
+//     });
 
 app.listen(port,console.log(`server is running on ${port}..........`));
 

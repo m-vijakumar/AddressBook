@@ -2,8 +2,9 @@ const express=require("express");
 const router =express.Router();
 const bodyparser=require("body-parser");
 const key =require("../../setup/connect").TOKEN_KEY;
-const productController = require("../../controllers/product")
+const addressController = require("../../controllers/address")
 const tokenHelper = require("../../helpers/sessionVerfiy")
+
 
 
 // @type    POST
@@ -11,14 +12,14 @@ const tokenHelper = require("../../helpers/sessionVerfiy")
 // @desc    starting router
 // @access  PRAVITE 
 
-router.post("/create",tokenHelper.sessionVerfiy,productController.create)
+router.post("/add",tokenHelper.sessionVerfiy,addressController.validCreateCredentials,addressController.create)
 
 // @type    GET
 //@route    /api/admin/product/all-post
 // @desc    starting router
 // @access  PUBLIC
 
-router.get("/all-posts",productController.getAllPosts)
+router.get("/all-address",tokenHelper.sessionVerfiy,addressController.getAllAddress)
 
 
 // @type    POST
@@ -26,7 +27,7 @@ router.get("/all-posts",productController.getAllPosts)
 // @desc    starting router which required post_id
 // @access  PUBLIC 
 
-router.post("/post",productController.getPost)
+router.post("/get/address",addressController.getAddress)
 
 
 // @type    POST
@@ -34,7 +35,7 @@ router.post("/post",productController.getPost)
 // @desc    starting router
 // @access  PRAVITE 
 
-router.post("/update",tokenHelper.sessionVerfiy,productController.updatePost)
+router.post("/edit",tokenHelper.sessionVerfiy,addressController.validCreateCredentials , addressController.updateContact)
 
 
 // @type    DELETE
@@ -42,6 +43,6 @@ router.post("/update",tokenHelper.sessionVerfiy,productController.updatePost)
 // @desc    starting router to delete post
 // @access  PRAVITE 
 
-router.delete("/delete",tokenHelper.sessionVerfiy,productController.deletePost)
+router.delete("/delete",tokenHelper.sessionVerfiy,addressController.deleteContact)
 
 module.exports = router;

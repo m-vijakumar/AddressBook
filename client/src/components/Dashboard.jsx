@@ -8,35 +8,46 @@ export default  function Dashboard(props) {
 
     const [isSpinner1,setSpinner1] =useState(false);
     const [isSpinner,setSpinner]=useState(true);
-    const [posts,setPosts]=useState([]);
+    const [address,setAddress]=useState([]);
+    const [autoList,setAutoList]=useState([]);
+    const [findKey  ,setFindKey]=useState(null);
     const userlog= async ()=>{
 
     try{
-    const resp = await fetch("/api/admin/auth/verfiy");
+    const resp = await fetch("/api/auth/verfiy");
     const data = await resp.json();
     if(data.success === false){
-        props.history.push("/login");
+      return props.history.push("/login");
      }
     }catch(e){
         // console.log(e);
-        props.history.push("/login");
+       return props.history.push("/login");
     }
     }
-    const getAllPosts = async()=>{
-        const resp = await fetch("/api/admin/product/all-posts");
-        const postsData = await resp.json();
-        await setPosts(postsData.data)
+    const getAllAddress = async()=>{
+
+        try {
+          const resp = await fetch("api/address/all-address");
+          const addressData = await resp.json();
+          if(addressData.data.addresses){
+            await setAddress(addressData.data.addresses)
+          }
+        } catch (error) {
+          return props.history.push("/login");
+        }
+        
+         
         // console.log(postsData)
         
     }
-    const updatePost =async(id,name) =>{
+    const updateAddress =async(id,name) =>{
         setSpinner1(true)
-        props.history.push(`/post/update/${id}/${name}`)
+        props.history.push(`/contact/update/${id}/${name}`)
         setSpinner1(false)
       
 
     }
-    const delPost = async(id) =>{
+    const delAddress = async(id) =>{
         try{
             if( !id  ){
         
@@ -44,7 +55,7 @@ export default  function Dashboard(props) {
             }else{
             setSpinner1(true)
             // e.persist();
-            const response = await fetch('/api/admin/product/delete' , {
+            const response = await fetch('api/address/delete' , {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -60,7 +71,7 @@ export default  function Dashboard(props) {
            
             // console.log(data.success)
             
-             await getAllPosts()
+             await getAllAddress()
              
              setSpinner1(false)
              
@@ -74,12 +85,36 @@ export default  function Dashboard(props) {
             //  console.log(e)
             }
         setSpinner1(false)
-          alert("Post Deleted...!")
+          alert("Contact Deleted...!")
     }
 
-    const showPosts = posts.map((post)=>{
+    const  ss = async(e) =>{
+      var auto=address;
+      setAutoList(address)
+    
+      if(e.target.value != null){
+        setFindKey(e.target.value)
+         auto = address.filter(address =>{
+        const regex = new RegExp(`^${e.target.value}`,'gi');
+        // const regex = new RegExp(`/\B${e.target.value}\B/`,'gi');
+        // const regex = new RegExp("/\[(.*?)\]/gi");
+        return address.name.match(regex) || address.phoneno.match(regex) ; 
+      })
+      setAutoList(auto);
+      console.log(auto);
+      }
+       
+      
+      };
+      // console.log(autoList);
+    
+    const showAutoList = autoList.map((post)=>{
 
-         return <Postdetails key={post._id} post={post} updatePost={updatePost} delPost={delPost}/>
+         return <Postdetails key={post._id} post={post} updateAddress={updateAddress} delAddress={delAddress}/>
+    })
+    const showAddress = address.map((post)=>{
+
+         return <Postdetails key={post._id} post={post} updateAddress={updateAddress} delAddress={delAddress}/>
     })
 
    const sp = <div className="spinner-border " role="status" id="spinner" style={{backgroundColor:"transparent"}}>
@@ -89,7 +124,7 @@ export default  function Dashboard(props) {
         // console.log("sssss")
         const aboutController = new AbortController()
         userlog();
-         getAllPosts();
+         getAllAddress();
         
         setSpinner(false)
 
@@ -112,11 +147,15 @@ export default  function Dashboard(props) {
         <div className="AdminApp">
         <h1>Welcome</h1>
         <div className="d-flex justify-content-end" >
-              <a href="/post/create"><button className="btn btn-primary"><h5>Create</h5></button></a>
+              <a href="/contact/create"><button className="btn btn-primary"><h5>Create</h5></button></a>
             </div>
             <br />
+            <div class="form-group ">
+                          
+              <input type="text" class="form-control md-2" name="find"  placeholder="Find" onChange={ss}/>
+          </div>
             
-            {showPosts}
+            {findKey ? showAutoList : showAddress}
             
             
         </div>

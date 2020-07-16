@@ -2,11 +2,11 @@ import React from 'react'
 import '../Admin.css'
 function Postdetails(props) {
 
-  const updatePost =() =>{
-        props.updatePost(props.post._id,props.post.title)   
+  const updateAddress =() =>{
+        props.updateAddress(props.post._id,props.post.name)   
   }
-  const delPost = async() =>{
-    props.delPost(props.post._id)
+  const delAddress = async() =>{
+    props.delAddress(props.post._id)
   }
 
 
@@ -15,9 +15,12 @@ function Postdetails(props) {
         <div className="postStyle ">
            
             <h6>  
-             {"  "}{props.post.title}
-             <button onClick={delPost} className="delButton" value={props.post._id}>delete</button>
-             <button onClick={updatePost} className="updateButton mr-3">update</button>
+            <button onClick={delAddress} className="delButton" value={props.post._id}>delete</button>
+             <button onClick={updateAddress} className="updateButton mr-3">update</button>
+             {"  "}{props.post.name}<br />
+             {"  "}{props.post.phoneno}<br />
+             {"  "}{props.post.address}<br />
+             
              
              </h6>
              

@@ -11,15 +11,29 @@ export default function Update(props) {
     const location = useLocation();
     const history = useHistory();
 
+    const userlog= async ()=>{
+
+      try{
+      const resp = await fetch("/api/auth/verfiy");
+      const data = await resp.json();
+      if(data.success === false){
+        return props.history.push("/login");
+       }
+      }catch(e){
+          // console.log(e);
+         return props.history.push("/login");
+      }
+      }
+
     const handleChange = e => {
    
       setContent({ ...content, [e.target.name]: e.target.value });
     };
-    const getPostContent = async(e)=>{
+    const getAddressContent = async(e)=>{
         // e.persist();
         // console.log(postId)
         try{
-        const response = await fetch('/api/admin/product/post' , {
+        const response = await fetch('/api/address/get/address' , {
             method: "POST",
             headers: {
             Accept: "application/json",
@@ -34,27 +48,29 @@ export default function Update(props) {
         const data = await response.json();
         if (data.error === false) {
           setContent(data.data)
+          setSpinner(false)
         } else {
-          alert("error..!");
+          alert("error..!!!");
           props.history.push("/dashboard");
+          setSpinner(false)
         }
         // console.log(data.data)
       }catch(err){
         alert("error..!");
-        props.history.push("/dashboard");
+         props.history.push("/dashboard");
+        setSpinner(false)
       }
 
     }
-
-
     useEffect(()=>{
 
-      
         try {
             
+          userlog();
             setPostId(location.pathname.split("/")[3]);
-            getPostContent();
-            setSpinner(false)
+            getAddressContent();
+           
+            
         } catch (error) {
             history.push("/")
         }
@@ -67,47 +83,49 @@ export default function Update(props) {
     const handleSubmit = async (e) => {
          
         try{
-        if( !postId ||!content.title ||!content.imgsrc ||!content.description){
+        if( !postId ||!content.name ||!content.phoneno ||!content.address){
     
           setMessage("fill the details")
         }else{
             
-        const postdata = {
-         
-          postId: postId,
-          title : content.title,
-          imgsrc:content.imgsrc,
-          description:content.description,
-        };
-    //  console.log(postdata)
-        setSpinner1(true)
-        e.persist();
-        const response = await fetch('/api/admin/product/update' , {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-    
-        },
-        mode:"cors",
-        body :JSON.stringify(postdata)
-      })
-      const data = await response.json();
-      // console.log(data)
-      if (data.error === false) {
-       
-        // console.log(data.success)
-         props.history.push("/dashboard");
-         setSpinner1(false)
-        //  setShow(true)
-        //return <Redirect to="/Dashboard" />
+          const contactdata = {
+            postId:postId,        
+            name : content.name,
+            phoneno:content.phoneno,
+            address:content.address,
+          };
+       console.log(contactdata)
+          setSpinner1(true)
+          e.persist();
+          const response = await fetch('/api/address/edit' , {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
         
-      }else{setSpinner1(false) ;alert("intrnal Error...!") }
-    
+            },
+            mode:"cors",
+            body :JSON.stringify(contactdata)
+          })
+          const data = await response.json();
+          // console.log(data)
+          if (data.error === false) {
+          
+            // console.log(data.success)
+            props.history.push("/dashboard");
+            setSpinner1(false)
+            
+          }else{
+              setSpinner1(false) ;
+              alert(data.msg);
+              props.history.push("/dashboard");
+              setSpinner(false)
+            }
         }
       }catch(e){setSpinner1(false) ;
          alert("Internal Error...")
-        //  console.log(e)
+         props.history.push("/dashboard");
+         setSpinner(false)
         }
       }
       
@@ -136,17 +154,17 @@ export default function Update(props) {
           <div onChange={handleChange} className="container">
           
           <div class="form-group ">
-          <label >Title</label>                
-              <input type="text" class="form-control md-2" name="title"  placeholder="title" defaultValue={content.title}/>
+          <label >Name</label>                
+              <input type="text" class="form-control md-2" name="name"  placeholder="Name" defaultValue={content.name}/>
           </div>
           
           <div class="form-group ">
-          <label >imgsrc</label>                
-              <input type="text" class="form-control md-2" name="imgsrc" placeholder="imgsrc" defaultValue={content.imgsrc}/>
+          <label >Phone No</label>                
+          <input type="number" class="form-control md-2" name="phoneno" placeholder="phoneno" onInput={(e) => e.target.value = e.target.value.slice(0, 12)} defaultValue={content.phoneno}/>
           </div>
           <div class="form-group ">
-          <label >Description</label>                
-          <textarea rows="3" cols="15" className="form-control" name="description" placeholder="description" defaultValue={content.description}></textarea>
+          <label >Address</label>                
+          <textarea rows="3" cols="15" className="form-control" name="address" placeholder="Address" defaultValue={content.address}></textarea>
           </div>
           </div>
           

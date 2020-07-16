@@ -7,7 +7,7 @@ function AdminNavbar(props){
  const  logger = async()=>{
 
   try{
-    const resp = await fetch("/api/admin/logout",{
+    const resp = await fetch("/api/logout",{
       method:"DELETE",
       headers: {
         Accept: "application/json",
